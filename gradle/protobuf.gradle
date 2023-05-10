@@ -10,9 +10,9 @@ sourceSets {
 }
 
 protobuf {
-    protoc { artifact = 'com.google.protobuf:protoc:3.5.1' }
+    protoc { artifact = 'com.google.protobuf:protoc:3.22.4' }
     plugins {
-        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.36.0" }
+        grpc { artifact = "io.grpc:protoc-gen-grpc-java:1.55.1" }
     }
 
     generateProtoTasks {

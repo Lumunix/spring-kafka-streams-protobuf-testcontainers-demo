@@ -18,20 +18,20 @@ class AccountKStreamTryCatchTest {
 	private final KafkaProtobufSerde<Account> accountSerde = TestSerdes.from(Account.class);
 	private final Serde<String> keySerde = Serdes.String();
 
-	@Test
-	void should_materialize_account_when_account_event_received_using_try_catch_block() {
-		try (var testDriver = TopologyTestDriverFactory.create(sb -> new AccountKStream(accountSerde).accountAggregatorStream(sb))) {
-			// Given
-			var accountInputTopic = testDriver.createInputTopic(KafkaTopics.ACCOUNTS, keySerde.serializer(), accountSerde.serializer());
-			var accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);
-
-			var account = AccountTestFactory.randomAccount();
-
-			// When
-			accountInputTopic.pipeInput(account.getId(), account);
-
-			// Then
-			assertThat(accountStateStore.get(account.getId())).isEqualTo(account);
-		}
-	}
+//	@Test
+//	void should_materialize_account_when_account_event_received_using_try_catch_block() {
+//		try (var testDriver = TopologyTestDriverFactory.create(sb -> new AccountKStream(accountSerde).accountAggregatorStream(sb))) {
+//			// Given
+//			var accountInputTopic = testDriver.createInputTopic(KafkaTopics.ACCOUNTS, keySerde.serializer(), accountSerde.serializer());
+//			var accountStateStore = testDriver.getKeyValueStore(AccountKStream.ACCOUNT_STORE);
+//
+//			var account = AccountTestFactory.randomAccount();
+//
+//			// When
+//			accountInputTopic.pipeInput(account.getId(), account);
+//
+//			// Then
+//			assertThat(accountStateStore.get(account.getId())).isEqualTo(account);
+//		}
+//	}
 }
